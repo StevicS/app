@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import ViewNotes from '@/views/ViewNotes.vue';
 import ViewAuth from '@/views/ViewAuth.vue';
+import ViewEditNote from '@/views/ViewEditNote.vue';
 
 const routes = [
 	{
@@ -8,11 +9,11 @@ const routes = [
 		name: 'notes',
 		component: ViewNotes,
 	},
-	// {
-	// 	path: '/editNote/:id',
-	// 	name: 'edit-note',
-	// 	component: ViewEditNote,
-	// },
+	{
+		path: '/editNote/:id',
+		name: 'edit-note',
+		component: ViewEditNote,
+	},
 	// {
 	// 	path: '/stats',
 	// 	name: 'stats',

@@ -1,7 +1,7 @@
 <template>
 	<header class="header">
 		<div class="header__wrap">
-			<a href="#" class="header__logo">app</a>
+			<a href="#" class="header__logo">expanses track</a>
 			<nav class="nav">
 				<div class="nav__wrap">
 					<ul class="nav__list">

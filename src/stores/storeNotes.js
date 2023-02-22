@@ -10,7 +10,19 @@ let getNotesSnapshot = null;
 export const useStoreNotes = defineStore('storeNotes', {
 	state: () => {
 		return {
-			notes: [],
+			notes: [
+				{
+					id: 'id1',
+					content: 'potrosnja goriva 6000din ',
+					category: 'fuel',
+				},
+				{
+					id: 'id2',
+					content: '22000din ',
+					category: 'bills',
+				},
+			],
+			categoryValue: 'Bills',
 			notesLoaded: false,
 		};
 	},
@@ -93,6 +105,13 @@ export const useStoreNotes = defineStore('storeNotes', {
 				return state.notes.filter((note) => {
 					return note.id === id;
 				})[0].content;
+			};
+		},
+		getNoteCategory: (state) => {
+			return (id) => {
+				return state.notes.filter((note) => {
+					return note.id === id;
+				})[0].category;
 			};
 		},
 		totalNotesCount: (state) => {
