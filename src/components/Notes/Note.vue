@@ -14,7 +14,7 @@
 		</div>
 		<div class="utility-info">
 			<ul class="utility-list">
-				<li><span class="licon icon-dat"></span>03 jun 2017</li>
+				<li><span class="licon icon-dat"></span>{{ dateFormatted }}</li>
 				<!-- <li><span class="licon icon-tag"></span><a href="#">Photos</a>, <a href="#">Nice</a></li> -->
 			</ul>
 		</div>
@@ -25,7 +25,9 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
 import { useStoreNotes } from '@/stores/storeNotes';
+import { useDateFormat } from '@vueuse/core';
 
 // store
 const storeNotes = useStoreNotes();
@@ -36,6 +38,12 @@ const props = defineProps({
 		type: Object,
 		required: true,
 	},
+});
+
+// date formated
+const dateFormatted = computed(() => {
+	let date = new Date();
+	return useDateFormat(date, 'DD-MM-YYYY @HH:mm:ss').value;
 });
 </script>
 

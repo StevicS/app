@@ -1,5 +1,5 @@
 <template>
-	<AddEditNote :textValue="textValue" :categoryValue="categoryValue" @submitNote="submitNoteValue" @update:textValue="textValue = $event" @update:categoryValue="categoryValue = $event">
+	<AddEditNote :textValue="textValue" :categoryValue="categoryValue" @submitNote="submitNoteValue" @update:textValue="handleTextValueUpdate" @update:categoryValue="handleCategoryValueUpdate">
 		<template #button>
 			<button class="textarea__submit-btn" type="submit">Add note</button>
 		</template>
@@ -17,7 +17,15 @@ import { useStoreNotes } from '@/stores/storeNotes';
 const storedNotes = useStoreNotes();
 
 const textValue = ref('');
-let categoryValue = ref('Bills');
+let categoryValue = ref('Racuni');
+
+const handleTextValueUpdate = (newValue) => {
+	textValue.value = newValue;
+};
+
+const handleCategoryValueUpdate = (newValue) => {
+	categoryValue.value = newValue;
+};
 
 const submitNoteValue = (formNote) => {
 	const user = {
@@ -27,8 +35,8 @@ const submitNoteValue = (formNote) => {
 	};
 
 	storedNotes.notes.push(user);
+
 	formNote.value.reset();
-	console.log(user);
 };
 </script>
 

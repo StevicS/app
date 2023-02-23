@@ -15,11 +15,13 @@ export const useStoreNotes = defineStore('storeNotes', {
 				// 	id: 'id1',
 				// 	content: 'potrosnja goriva 6000din ',
 				// 	category: 'fuel',
+				// 	date: '13.02.1456',
 				// },
 				// {
 				// 	id: 'id2',
 				// 	content: '22000din ',
 				// 	category: 'bills',
+				// 	date: '23.04.1290',
 				// },
 			],
 

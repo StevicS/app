@@ -2,20 +2,20 @@
 	<div class="main">
 		<form action="" @submit.prevent="onSubmit" ref="formNote">
 			<div class="select">
-				<select :value="props.categoryValue" @input="$emit('update:categoryValue', $event.target.value)">
-					<option value="Bills" selected>Bills</option>
-					<option value="Food">Food</option>
-					<option value="Fuel">Fuel</option>
-					<option value="Restoraunts">Restoraunts</option>
-					<option value="Shopping">Shopping</option>
-					<option value="Car expanses">Car expanses</option>
-					<option value="Other">Other</option>
+				<select :value="props.categoryValue" @input="emitCategory">
+					<option value="Racuni" selected>Racuni</option>
+					<option value="Hrana">Hrana</option>
+					<option value="Gorivo">Gorivo</option>
+					<option value="Restorani">Restorani</option>
+					<option value="Soping">Soping</option>
+					<option value="Auto">Auto</option>
+					<option value="Drugo">Drugo</option>
 				</select>
 			</div>
 
 			<div class="textarea">
 				<div class="textarea__wrap">
-					<textarea :value="props.textValue" @input="$emit('update:textValue', $event.target.value)" class="textarea__field" name="" id="" cols="30" rows="10"></textarea>
+					<textarea :value="props.textValue" @input="emitText" class="textarea__field" name="" id="" cols="30" rows="10"></textarea>
 					<slot name="button" />
 				</div>
 			</div>
@@ -41,13 +41,14 @@ const formNote = ref(null);
 
 // emits
 
-const emitText = () => {
-	emit('update:textValue', text.value);
+const emitCategory = (event) => {
+	emit('update:categoryValue', event.target.value);
 };
 
-const emitCategory = () => {
-	emit('update:categoryValue', number.value);
+const emitText = (event) => {
+	emit('update:textValue', event.target.value);
 };
+
 const emit = defineEmits(['submitNote', 'update:textValue', 'update:categoryValue']);
 
 const onSubmit = () => {
