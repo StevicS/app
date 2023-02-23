@@ -14,11 +14,6 @@ const routes = [
 		name: 'edit-note',
 		component: ViewEditNote,
 	},
-	// {
-	// 	path: '/stats',
-	// 	name: 'stats',
-	// 	component: ViewStats,
-	// },
 	{
 		path: '/auth',
 		name: 'auth',

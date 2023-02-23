@@ -10,12 +10,12 @@
 		</div>
 		<div class="blog-card__buttons">
 			<RouterLink :to="`/editNote/${note.id}`" class="blog-card__btn">edit</RouterLink>
-			<button class="blog-card__btn">delete</button>
+			<button class="blog-card__btn" @click="storeNotes.deleteNote(note.id)">delete</button>
 		</div>
 		<div class="utility-info">
 			<ul class="utility-list">
 				<li><span class="licon icon-dat"></span>03 jun 2017</li>
-				<li><span class="licon icon-tag"></span><a href="#">Photos</a>, <a href="#">Nice</a></li>
+				<!-- <li><span class="licon icon-tag"></span><a href="#">Photos</a>, <a href="#">Nice</a></li> -->
 			</ul>
 		</div>
 		<div class="gradient-overlay"></div>
@@ -25,6 +25,11 @@
 </template>
 
 <script setup>
+import { useStoreNotes } from '@/stores/storeNotes';
+
+// store
+const storeNotes = useStoreNotes();
+
 // props
 const props = defineProps({
 	note: {

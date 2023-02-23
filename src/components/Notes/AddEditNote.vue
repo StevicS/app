@@ -1,8 +1,8 @@
 <template>
 	<div class="main">
-		<form action="" @submit.prevent="onSubmit">
+		<form action="" @submit.prevent="onSubmit" ref="formNote">
 			<div class="select">
-				<select v-model="storedNotes.categoryValue">
+				<select :value="props.categoryValue" @input="$emit('update:categoryValue', $event.target.value)">
 					<option value="Bills" selected>Bills</option>
 					<option value="Food">Food</option>
 					<option value="Fuel">Fuel</option>
@@ -15,7 +15,7 @@
 
 			<div class="textarea">
 				<div class="textarea__wrap">
-					<textarea :value="props.modelValue" @input="$emit('update:modelValue', $event.target.value)" class="textarea__field" name="" id="" cols="30" rows="10"></textarea>
+					<textarea :value="props.textValue" @input="$emit('update:textValue', $event.target.value)" class="textarea__field" name="" id="" cols="30" rows="10"></textarea>
 					<slot name="button" />
 				</div>
 			</div>
@@ -25,26 +25,33 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useStoreNotes } from '@/stores/storeNotes';
-
-// store
-const storedNotes = useStoreNotes();
-
 // props
 const props = defineProps({
-	modelValue: {
+	textValue: {
 		type: String,
-		requierd: true,
+		required: true,
+	},
+	categoryValue: {
+		type: String,
+		required: true,
 	},
 });
 
-// emits
-const emit = defineEmits(['submitNote', 'update:modelValue']);
+const formNote = ref(null);
 
-const category = ref('Bills');
+// emits
+
+const emitText = () => {
+	emit('update:textValue', text.value);
+};
+
+const emitCategory = () => {
+	emit('update:categoryValue', number.value);
+};
+const emit = defineEmits(['submitNote', 'update:textValue', 'update:categoryValue']);
 
 const onSubmit = () => {
-	emit('submitNote', storedNotes.categoryValue);
+	emit('submitNote', formNote);
 };
 </script>
 

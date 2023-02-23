@@ -1,5 +1,5 @@
 <template>
-	<AddEditNote v-model="newTextNote" @submitNote="submitNoteValue">
+	<AddEditNote :textValue="textValue" :categoryValue="categoryValue" @submitNote="submitNoteValue" @update:textValue="textValue = $event" @update:categoryValue="categoryValue = $event">
 		<template #button>
 			<button class="textarea__submit-btn" type="submit">Add note</button>
 		</template>
@@ -16,36 +16,23 @@ import { useStoreNotes } from '@/stores/storeNotes';
 // store
 const storedNotes = useStoreNotes();
 
-// const notes = ref([
-// 	{
-// 		id: 'id1',
-// 		content: 'potrosnja goriva 6000din ',
-// 		category: 'fuel',
-// 	},
-// 	{
-// 		id: 'id2',
-// 		content: '22000din ',
-// 		category: 'bills',
-// 	},
-// ]);
+const textValue = ref('');
+let categoryValue = ref('Bills');
 
-const newTextNote = ref('');
-let newCategoryNote = ref('');
-
-const submitNoteValue = (category) => {
-	newCategoryNote = category;
-
+const submitNoteValue = (formNote) => {
 	const user = {
-		id: 'id3',
-		content: newTextNote,
-		category: newCategoryNote,
+		id: 'id' + new Date().getTime(),
+		content: textValue.value,
+		category: categoryValue.value,
 	};
 
 	storedNotes.notes.push(user);
+	formNote.value.reset();
+	console.log(user);
 };
 </script>
 
-<style scoped>
+<style>
 .textarea__submit-btn {
 	display: block;
 	margin-left: auto;

@@ -11,18 +11,18 @@ export const useStoreNotes = defineStore('storeNotes', {
 	state: () => {
 		return {
 			notes: [
-				{
-					id: 'id1',
-					content: 'potrosnja goriva 6000din ',
-					category: 'fuel',
-				},
-				{
-					id: 'id2',
-					content: '22000din ',
-					category: 'bills',
-				},
+				// {
+				// 	id: 'id1',
+				// 	content: 'potrosnja goriva 6000din ',
+				// 	category: 'fuel',
+				// },
+				// {
+				// 	id: 'id2',
+				// 	content: '22000din ',
+				// 	category: 'bills',
+				// },
 			],
-			categoryValue: 'Bills',
+
 			notesLoaded: false,
 		};
 	},
@@ -61,42 +61,43 @@ export const useStoreNotes = defineStore('storeNotes', {
 			this.notes = [];
 			if (getNotesSnapshot) getNotesSnapshot(); // unsubscribe from active listener
 		},
-		async addNote(newNoteContent) {
-			let currentDate = new Date().getTime();
-			let date = currentDate.toString();
-			// const userNote = {
-			// 	id: id,
-			// 	content: newNoteContent,
-			// };
-			// this.notes.unshift(userNote);
+		// async addNote(newNoteContent) {
+		// 	let currentDate = new Date().getTime();
+		// 	let date = currentDate.toString();
+		// 	// const userNote = {
+		// 	// 	id: id,
+		// 	// 	content: newNoteContent,
+		// 	// };
+		// 	// this.notes.unshift(userNote);
 
-			// await setDoc(doc(noteCollectionRef, id), {
-			// 	content: newNoteContent,
-			// 	// id: id
-			// 	id,
-			// });
+		// 	// await setDoc(doc(noteCollectionRef, id), {
+		// 	// 	content: newNoteContent,
+		// 	// 	// id: id
+		// 	// 	id,
+		// 	// });
 
-			await addDoc(noteCollectionRef, {
-				content: newNoteContent,
-				date,
-			});
-		},
-		async deleteNote(idToDelete) {
-			await deleteDoc(doc(noteCollectionRef, idToDelete));
+		// 	await addDoc(noteCollectionRef, {
+		// 		content: newNoteContent,
+		// 		date,
+		// 	});
+		// },
+		deleteNote(idToDelete) {
 			this.notes = this.notes.filter((note) => {
 				return note.id !== idToDelete;
 			});
 		},
-		async upadateNote(id, content) {
-			// let index = this.notes.findIndex((note) => {
-			// 	return note.id === id;
-			// });
-			// this.notes[index].content = content;
-
-			await updateDoc(doc(noteCollectionRef, id), {
-				// content: content
-				content,
+		upadateNote(id, category, content) {
+			let index = this.notes.findIndex((note) => {
+				return note.id === id;
 			});
+			console.log(content);
+			this.notes[index].content = content;
+			this.notes[index].category = category;
+
+			// await updateDoc(doc(noteCollectionRef, id), {
+			// 	// content: content
+			// 	content,
+			// });
 		},
 	},
 	getters: {
@@ -113,16 +114,6 @@ export const useStoreNotes = defineStore('storeNotes', {
 					return note.id === id;
 				})[0].category;
 			};
-		},
-		totalNotesCount: (state) => {
-			return state.notes.length;
-		},
-		totalCharCount: (state) => {
-			let count = 0;
-			state.notes.forEach((note) => {
-				count += note.content.length;
-			});
-			return count;
 		},
 	},
 });
