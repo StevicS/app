@@ -88,6 +88,7 @@ export const useStoreNotes = defineStore('storeNotes', {
 			});
 		},
 		async deleteNote(idToDelete) {
+			await deleteDoc(doc(noteCollectionRef, idToDelete));
 			this.notes = this.notes.filter((note) => {
 				return note.id !== idToDelete;
 			});

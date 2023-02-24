@@ -11,7 +11,15 @@ import { useStoreNotes } from '@/stores/storeNotes';
 const storeNotes = useStoreNotes();
 
 onMounted(() => {
-	const { category, content } = storeNotes.notes[0];
-	console.log(category, content);
+	const categories = [];
+	const contents = [];
+
+	storeNotes.notes.map((note) => {
+		const { category, content } = note;
+		categories.push(category);
+		contents.push(content);
+	});
+
+	console.log(categories, contents);
 });
 </script>

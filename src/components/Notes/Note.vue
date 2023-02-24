@@ -10,7 +10,7 @@
 		</div>
 		<div class="blog-card__buttons">
 			<RouterLink :to="`/editNote/${note.id}`" class="blog-card__btn">edit</RouterLink>
-			<button class="blog-card__btn" @click="storeNotes.deleteNote(note.id)">delete</button>
+			<button class="blog-card__btn" @click="deleteNote = true">delete</button>
 		</div>
 		<div class="utility-info">
 			<ul class="utility-list">
@@ -21,13 +21,14 @@
 		<div class="gradient-overlay"></div>
 		<div class="color-overlay"></div>
 	</div>
-	<!-- /.blog-card -->
+	<DeleteNoteModal v-if="deleteNote" v-model="deleteNote" :noteId="note.id" />
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 import { useStoreNotes } from '@/stores/storeNotes';
 import { useDateFormat } from '@vueuse/core';
+import DeleteNoteModal from './DeleteNoteModal.vue';
 
 // store
 const storeNotes = useStoreNotes();
@@ -39,6 +40,7 @@ const props = defineProps({
 		required: true,
 	},
 });
+const deleteNote = ref(false);
 
 // date formated
 const dateFormatted = computed(() => {
