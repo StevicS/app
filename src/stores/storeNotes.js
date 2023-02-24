@@ -48,6 +48,7 @@ export const useStoreNotes = defineStore('storeNotes', {
 							id: doc.id,
 							content: doc.data().content,
 							date: doc.data().date,
+							category: doc.data().category,
 						};
 						notes.push(note);
 						this.notes = notes;
@@ -63,43 +64,47 @@ export const useStoreNotes = defineStore('storeNotes', {
 			this.notes = [];
 			if (getNotesSnapshot) getNotesSnapshot(); // unsubscribe from active listener
 		},
-		// async addNote(newNoteContent) {
-		// 	let currentDate = new Date().getTime();
-		// 	let date = currentDate.toString();
-		// 	// const userNote = {
-		// 	// 	id: id,
-		// 	// 	content: newNoteContent,
-		// 	// };
-		// 	// this.notes.unshift(userNote);
+		async addNote(newNoteContent, newCategorValue) {
+			let currentDate = new Date().getTime();
+			let date = currentDate.toString();
 
-		// 	// await setDoc(doc(noteCollectionRef, id), {
-		// 	// 	content: newNoteContent,
-		// 	// 	// id: id
-		// 	// 	id,
-		// 	// });
+			// const userNote = {
+			// 	id: id,
+			// 	content: newNoteContent,
+			// };
+			// this.notes.unshift(userNote);
 
-		// 	await addDoc(noteCollectionRef, {
-		// 		content: newNoteContent,
-		// 		date,
-		// 	});
-		// },
-		deleteNote(idToDelete) {
+			// await setDoc(doc(noteCollectionRef, id), {
+			// 	content: newNoteContent,
+			// 	// id: id
+			// 	id,
+			// });
+
+			console.log(typeof newNoteContent);
+			await addDoc(noteCollectionRef, {
+				content: newNoteContent,
+				category: newCategorValue,
+				date,
+			});
+		},
+		async deleteNote(idToDelete) {
 			this.notes = this.notes.filter((note) => {
 				return note.id !== idToDelete;
 			});
 		},
-		upadateNote(id, category, content) {
-			let index = this.notes.findIndex((note) => {
-				return note.id === id;
-			});
-			console.log(content);
-			this.notes[index].content = content;
-			this.notes[index].category = category;
-
-			// await updateDoc(doc(noteCollectionRef, id), {
-			// 	// content: content
-			// 	content,
+		async upadateNote(id, category, content) {
+			// let index = this.notes.findIndex((note) => {
+			// 	return note.id === id;
 			// });
+			// console.log(content);
+			// this.notes[index].content = content;
+			// this.notes[index].category = category;
+
+			await updateDoc(doc(noteCollectionRef, id), {
+				// content: content
+				content,
+				category,
+			});
 		},
 	},
 	getters: {

@@ -33,3 +33,12 @@ const handleSaveClicked = () => {
 	router.push('/');
 };
 </script>
+
+<style scoped>
+.textarea__submit-btn {
+	display: inline;
+}
+.button-cancel {
+	margin-right: 20px;
+}
+</style>

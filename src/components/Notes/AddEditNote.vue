@@ -15,8 +15,10 @@
 
 			<div class="textarea">
 				<div class="textarea__wrap">
-					<textarea :value="props.textValue" @input="emitText" class="textarea__field" name="" id="" cols="30" rows="10"></textarea>
-					<slot name="button" />
+					<input :value="props.textValue" @input="emitText" class="textarea__field" v-autofocus name="" id="" type="number" />
+					<div class="textarea__buttons-wrap">
+						<slot name="button" />
+					</div>
 				</div>
 			</div>
 		</form>
@@ -25,6 +27,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { vAutofocus } from '@/directives/vAutoFocus';
 // props
 const props = defineProps({
 	textValue: {
@@ -119,7 +122,7 @@ select {
 .textarea__wrap {
 	width: 100%;
 	max-width: 880px;
-	margin: 0 auto;
+	margin: 0 auto 40px;
 }
 
 .textarea__field {
@@ -134,5 +137,9 @@ select {
 	font-family: inherit;
 	color: #695c79;
 	margin-bottom: 30px;
+}
+
+.textarea__buttons-wrap {
+	text-align: end;
 }
 </style>

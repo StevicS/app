@@ -4,7 +4,7 @@
 			<button class="textarea__submit-btn" type="submit">Add note</button>
 		</template>
 	</AddEditNote>
-	<Note v-for="note in storedNotes.notes" :key="note.id" :note="note" />
+	<Note v-for="note in storeNotes.notes" :key="note.id" :note="note" />
 </template>
 
 <script setup>
@@ -14,7 +14,12 @@ import Note from '../components/Notes/Note.vue';
 import { useStoreNotes } from '@/stores/storeNotes';
 
 // store
-const storedNotes = useStoreNotes();
+const storeNotes = useStoreNotes();
+
+// mounted
+// onMounted(() => {
+// 	storedNotes.init();
+// });
 
 const textValue = ref('');
 let categoryValue = ref('Racuni');
@@ -27,14 +32,21 @@ const handleCategoryValueUpdate = (newValue) => {
 	categoryValue.value = newValue;
 };
 
+// methods
+// const addNote = () => {
+// 	storeNotes.addNote(newNote.value);
+
+// };
+
 const submitNoteValue = (formNote) => {
+	storeNotes.addNote(textValue.value, categoryValue.value);
 	const user = {
 		id: 'id' + new Date().getTime(),
 		content: textValue.value,
 		category: categoryValue.value,
 	};
 
-	storedNotes.notes.push(user);
+	storeNotes.notes.push(user);
 
 	formNote.value.reset();
 };

@@ -1,12 +1,12 @@
 <template>
 	<header class="header">
 		<div class="header__wrap">
-			<a href="#" class="header__logo">expanses track</a>
+			<RouterLink to="/" class="header__logo">expanses track</RouterLink>
 			<nav class="nav">
 				<div class="nav__wrap">
 					<ul class="nav__list">
-						<li class="nav__item">main</li>
-						<li class="nav__item">second</li>
+						<li class="nav__item"><RouterLink to="/" active-class="is-active" class="nav__link">notes</RouterLink></li>
+						<li class="nav__item"><RouterLink to="/calc" active-class="is-active" class="nav__link">calculation</RouterLink></li>
 					</ul>
 					<button v-if="storeAuth.user.id" @click="logOut" class="nav__logout">logout - {{ storeAuth.user.email }}</button>
 				</div>
@@ -83,5 +83,8 @@ const logOut = () => {
 	border: 1px solid #b3bada;
 	padding: 4px 10px;
 	cursor: pointer;
+}
+.is-active {
+	color: #f39c12;
 }
 </style>

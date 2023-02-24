@@ -2,12 +2,18 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import ViewNotes from '@/views/ViewNotes.vue';
 import ViewAuth from '@/views/ViewAuth.vue';
 import ViewEditNote from '@/views/ViewEditNote.vue';
+import ViewCalculation from '@/views/ViewCalculation.vue';
 
 const routes = [
 	{
 		path: '/',
 		name: 'notes',
 		component: ViewNotes,
+	},
+	{
+		path: '/calc',
+		name: 'calculation',
+		component: ViewCalculation,
 	},
 	{
 		path: '/editNote/:id',
@@ -25,5 +31,19 @@ const router = createRouter({
 	history: createWebHashHistory(),
 	routes,
 });
+
+// nav guards
+// router.beforeEach(async (to, from) => {
+// 	const storeAuth = useStoreAuth();
+// 	if (!storeAuth.user.id && to.name !== 'auth') {
+// 		return {
+// 			name: 'auth',
+// 		};
+// 	}
+
+// 	if (storeAuth.user.id && to.name === 'auth') {
+// 		return false;
+// 	}
+// });
 
 export default router;
