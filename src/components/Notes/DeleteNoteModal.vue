@@ -1,18 +1,18 @@
 <template>
-	<div class="modal is-active p-4">
-		<div class="modal-background"></div>
-		<div class="modal-card" ref="closeModalRef">
-			<header class="modal-card-head">
-				<p class="modal-card-title">Delete note?</p>
-				<button class="delete" aria-label="close" @click="$emit('update:modelValue', (deleteNote = false))"></button>
-			</header>
-			<section class="modal-card-body">
+	<div class="modal">
+		<div class="modal__background"></div>
+		<div class="modal__card" ref="closeModalRef">
+			<div class="modal__card-header">
+				<p class="modal__card-title">Delete note?</p>
+				<button class="modal__btn-close" aria-label="close" @click="$emit('update:modelValue', (deleteNote = false))"></button>
+			</div>
+			<div class="modal__card-body">
 				<p>Are you sure you want to delete this note?</p>
-			</section>
-			<footer class="modal-card-foot is-justify-content-flex-end">
-				<button class="button" @click="$emit('update:modelValue', (deleteNote = false))">Cancel</button>
-				<button class="button is-danger" @click="storeNotes.deleteNote(noteId)">Delete</button>
-			</footer>
+			</div>
+			<div class="modal__card-footer">
+				<button class="modal__card-footer-btn" @click="$emit('update:modelValue', (deleteNote = false))">Cancel</button>
+				<button class="modal__card-footer-btn modal__card-footer-btn--color" @click="storeNotes.deleteNote(noteId)">Delete</button>
+			</div>
 		</div>
 	</div>
 </template>
@@ -39,7 +39,7 @@ const emits = defineEmits(['update:modelValue']);
 <style scoped>
 .modal {
 	align-items: center;
-	display: none;
+	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	overflow: hidden;
@@ -51,10 +51,10 @@ const emits = defineEmits(['update:modelValue']);
 	top: 0;
 }
 
-.modal.is-active {
+/* .modal--active {
 	display: flex;
-}
-.modal-background {
+} */
+.modal__background {
 	bottom: 0;
 	left: 0;
 	position: absolute;
@@ -63,7 +63,7 @@ const emits = defineEmits(['update:modelValue']);
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-card {
+.modal__card {
 	display: flex;
 	flex-direction: column;
 	max-height: calc(100vh - 40px);
@@ -73,13 +73,13 @@ const emits = defineEmits(['update:modelValue']);
 	width: 100%;
 }
 
-.modal-card-head {
+.modal__card-header {
 	border-bottom: 1px solid #dbdbdb;
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
 }
 
-.modal-card-title {
+.modal__card-title {
 	color: #363636;
 	flex-grow: 1;
 	flex-shrink: 0;
@@ -87,7 +87,7 @@ const emits = defineEmits(['update:modelValue']);
 	line-height: 1;
 }
 
-.delete {
+.modal__btn-close {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -116,7 +116,7 @@ const emits = defineEmits(['update:modelValue']);
 	position: relative;
 }
 
-.delete::before {
+.modal__btn-close::before {
 	position: absolute;
 	content: 'x';
 	font-size: 16px;
@@ -125,7 +125,7 @@ const emits = defineEmits(['update:modelValue']);
 	color: #363636;
 }
 
-.modal-card-body {
+.modal__card-body {
 	-webkit-overflow-scrolling: touch;
 	background-color: #fff;
 	flex-grow: 1;
@@ -134,23 +134,20 @@ const emits = defineEmits(['update:modelValue']);
 	padding: 20px;
 }
 
-.modal-card-body p {
+.modal__card-body p {
 	color: #363636;
 	font-size: 22px;
 }
 
-.is-justify-content-flex-end {
-	justify-content: flex-end !important;
-}
-
-.modal-card-foot {
+.modal__card-footer {
 	border-bottom-left-radius: 6px;
 	border-bottom-right-radius: 6px;
 	border-top: 1px solid #dbdbdb;
+	justify-content: flex-end !important;
 }
 
-.modal-card-foot,
-.modal-card-head {
+.modal__card-footer,
+.modal__card-header {
 	align-items: center;
 	background-color: #f5f5f5;
 	display: flex;
@@ -160,7 +157,7 @@ const emits = defineEmits(['update:modelValue']);
 	position: relative;
 }
 
-.button {
+.modal__card-footer-btn {
 	margin-right: 15px;
 	border: 1px solid #363636;
 	outline: none;
@@ -169,7 +166,11 @@ const emits = defineEmits(['update:modelValue']);
 	padding: 8px;
 	cursor: pointer;
 }
-.button:hover {
+.modal__card-footer-btn:hover {
 	opacity: 0.6;
+}
+
+.modal__card-footer-btn--color {
+	background-color: rgb(223, 39, 39);
 }
 </style>

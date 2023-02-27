@@ -4,6 +4,9 @@
 			<button class="textarea__submit-btn" type="submit">Add note</button>
 		</template>
 	</AddEditNote>
+	<div class="loading">
+		<h2 v-if="!storeNotes.notesLoaded" class="loading-title">Loading...</h2>
+	</div>
 	<Note v-for="note in storeNotes.notes" :key="note.id" :note="note" />
 </template>
 
@@ -64,5 +67,16 @@ const submitNoteValue = (formNote) => {
 	font-size: 22px;
 	color: #695c79;
 	cursor: pointer;
+}
+
+.loading {
+	max-width: 1400px;
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.loading-title {
+	font-size: 40px;
 }
 </style>

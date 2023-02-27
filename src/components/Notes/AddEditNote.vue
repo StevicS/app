@@ -59,12 +59,12 @@ const onSubmit = () => {
 };
 </script>
 
-<style scoped>
-:root {
+<style setup>
+/* :root {
 	--background-gradient: linear-gradient(30deg, #f39c12 30%, #f1c40f);
 	--gray: #34495e;
 	--darkgray: #2c3e50;
-}
+} */
 
 .main {
 	margin: 0 auto;

@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
+import { useStoreAuth } from '@/stores/storeAuth';
 import ViewNotes from '@/views/ViewNotes.vue';
 import ViewAuth from '@/views/ViewAuth.vue';
 import ViewEditNote from '@/views/ViewEditNote.vue';
@@ -33,17 +34,17 @@ const router = createRouter({
 });
 
 // nav guards
-// router.beforeEach(async (to, from) => {
-// 	const storeAuth = useStoreAuth();
-// 	if (!storeAuth.user.id && to.name !== 'auth') {
-// 		return {
-// 			name: 'auth',
-// 		};
-// 	}
+router.beforeEach(async (to, from) => {
+	const storeAuth = useStoreAuth();
+	if (!storeAuth.user.id && to.name !== 'auth') {
+		return {
+			name: 'auth',
+		};
+	}
 
-// 	if (storeAuth.user.id && to.name === 'auth') {
-// 		return false;
-// 	}
-// });
+	if (storeAuth.user.id && to.name === 'auth') {
+		return false;
+	}
+});
 
 export default router;

@@ -20,27 +20,29 @@ let contentArr = ref([]);
 const storeNotes = useStoreNotes();
 
 onMounted(() => {
-	storeNotes.notes.forEach((note) => {
-		const { category, content } = note;
-		categoryArr.value.push(category);
-		contentArr.value.push(parseInt(content));
-	});
-	// Get current month and year
-	// const today = new Date();
-	// const currentMonth = today.getMonth();
-	// const currentYear = today.getFullYear();
-
 	// storeNotes.notes.forEach((note) => {
-	// 	const { category, content, date } = note;
-	// 	// Get month and year from note date
-	// 	const noteMonth = new Date(date).getMonth();
-	// 	const noteYear = new Date(date).getFullYear();
-	// 	// Only add note if it's from the current month and year
-	// 	if (noteMonth === currentMonth && noteYear === currentYear) {
-	// 		categoryArr.value.push(category);
-	// 		contentArr.value.push(parseInt(content));
-	// 	}
+	// 	const { category, content } = note;
+	// 	categoryArr.value.push(category);
+	// 	contentArr.value.push(parseInt(content));
 	// });
+	// Get current month and year
+
+	storeNotes.notes.forEach((note) => {
+		const { category, content, date } = note;
+		const intDate = parseInt(date);
+		const currentDay = new Date(intDate);
+
+		const currentMonth = currentDay.getMonth() + 1;
+		const currentYear = currentDay.getFullYear();
+
+		const noteMonth = new Date(currentDay).getMonth() + 1;
+		const noteYear = new Date(currentDay).getFullYear();
+
+		if (noteMonth === currentMonth && noteYear === currentYear) {
+			categoryArr.value.push(category);
+			contentArr.value.push(parseInt(content));
+		}
+	});
 });
 
 const categoryCounts = computed(() => {
