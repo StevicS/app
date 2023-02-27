@@ -80,7 +80,6 @@ export const useStoreNotes = defineStore('storeNotes', {
 			// 	id,
 			// });
 
-			console.log(typeof newNoteContent);
 			await addDoc(noteCollectionRef, {
 				content: newNoteContent,
 				category: newCategorValue,

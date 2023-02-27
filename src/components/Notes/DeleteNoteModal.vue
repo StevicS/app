@@ -1,22 +1,20 @@
 <template>
-	<Teleport to="body">
-		<div class="modal is-active p-4">
-			<div class="modal-background"></div>
-			<div class="modal-card" ref="closeModalRef">
-				<header class="modal-card-head">
-					<p class="modal-card-title">Delete note?</p>
-					<button class="delete" aria-label="close" @click="$emit('update:modelValue', (deleteNote = false))"></button>
-				</header>
-				<section class="modal-card-body">
-					<p>Are you sure you want to delete this note?</p>
-				</section>
-				<footer class="modal-card-foot is-justify-content-flex-end">
-					<button class="button" @click="$emit('update:modelValue', (deleteNote = false))">Cancel</button>
-					<button class="button is-danger" @click="storeNotes.deleteNote(noteId)">Delete</button>
-				</footer>
-			</div>
+	<div class="modal is-active p-4">
+		<div class="modal-background"></div>
+		<div class="modal-card" ref="closeModalRef">
+			<header class="modal-card-head">
+				<p class="modal-card-title">Delete note?</p>
+				<button class="delete" aria-label="close" @click="$emit('update:modelValue', (deleteNote = false))"></button>
+			</header>
+			<section class="modal-card-body">
+				<p>Are you sure you want to delete this note?</p>
+			</section>
+			<footer class="modal-card-foot is-justify-content-flex-end">
+				<button class="button" @click="$emit('update:modelValue', (deleteNote = false))">Cancel</button>
+				<button class="button is-danger" @click="storeNotes.deleteNote(noteId)">Delete</button>
+			</footer>
 		</div>
-	</Teleport>
+	</div>
 </template>
 
 <script setup>
@@ -47,6 +45,10 @@ const emits = defineEmits(['update:modelValue']);
 	overflow: hidden;
 	position: fixed;
 	z-index: 40;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
 }
 
 .modal.is-active {
@@ -58,6 +60,7 @@ const emits = defineEmits(['update:modelValue']);
 	position: absolute;
 	right: 0;
 	top: 0;
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-card {
@@ -66,6 +69,8 @@ const emits = defineEmits(['update:modelValue']);
 	max-height: calc(100vh - 40px);
 	overflow: hidden;
 	-ms-overflow-y: visible;
+	max-width: 440px;
+	width: 100%;
 }
 
 .modal-card-head {
@@ -108,6 +113,16 @@ const emits = defineEmits(['update:modelValue']);
 	position: relative;
 	vertical-align: top;
 	width: 20px;
+	position: relative;
+}
+
+.delete::before {
+	position: absolute;
+	content: 'x';
+	font-size: 16px;
+	top: 2px;
+	right: 5px;
+	color: #363636;
 }
 
 .modal-card-body {
@@ -117,6 +132,11 @@ const emits = defineEmits(['update:modelValue']);
 	flex-shrink: 1;
 	overflow: auto;
 	padding: 20px;
+}
+
+.modal-card-body p {
+	color: #363636;
+	font-size: 22px;
 }
 
 .is-justify-content-flex-end {
@@ -138,5 +158,18 @@ const emits = defineEmits(['update:modelValue']);
 	justify-content: flex-start;
 	padding: 20px;
 	position: relative;
+}
+
+.button {
+	margin-right: 15px;
+	border: 1px solid #363636;
+	outline: none;
+	font-family: inherit;
+	border-radius: 12px;
+	padding: 8px;
+	cursor: pointer;
+}
+.button:hover {
+	opacity: 0.6;
 }
 </style>
