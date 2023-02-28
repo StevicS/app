@@ -6,7 +6,7 @@
 				<div class="nav__wrap">
 					<ul class="nav__list">
 						<li class="nav__item"><RouterLink to="/" active-class="is-active" class="nav__link">notes</RouterLink></li>
-						<li class="nav__item"><RouterLink to="/calc" active-class="is-active" class="nav__link">calculation</RouterLink></li>
+						<li class="nav__item"><RouterLink to="/calc" active-class="is-active" class="nav__link">expanses</RouterLink></li>
 					</ul>
 					<button v-if="storeAuth.user.id" @click="logOut" class="nav__logout">logout - {{ storeAuth.user.email }}</button>
 				</div>

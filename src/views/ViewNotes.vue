@@ -42,15 +42,16 @@ const handleCategoryValueUpdate = (newValue) => {
 // };
 
 const submitNoteValue = (formNote) => {
+	// if (textValue.value.trim() === '') {
+	// 	return;
+	// }
 	storeNotes.addNote(textValue.value, categoryValue.value);
-	const user = {
-		id: 'id' + new Date().getTime(),
-		content: textValue.value,
-		category: categoryValue.value,
-	};
-
-	storeNotes.notes.push(user);
-
+	// const user = {
+	// 	id: 'id' + new Date().getTime(),
+	// 	content: textValue.value,
+	// 	category: categoryValue.value,
+	// };
+	// storeNotes.notes.push(user);
 	formNote.value.reset();
 };
 </script>
@@ -67,6 +68,13 @@ const submitNoteValue = (formNote) => {
 	font-size: 22px;
 	color: #695c79;
 	cursor: pointer;
+	transition: 0.3s ease;
+	transition-property: color, background-color;
+}
+
+.textarea__submit-btn:hover {
+	color: #f39c12;
+	background-color: #695c79;
 }
 
 .loading {

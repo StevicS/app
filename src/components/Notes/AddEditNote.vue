@@ -116,17 +116,18 @@ select {
 }
 
 .textarea {
+	max-width: 530px;
 	width: 100%;
-}
-
-.textarea__wrap {
-	width: 100%;
-	max-width: 880px;
 	margin: 0 auto 40px;
 }
 
+.textarea__wrap {
+	display: flex;
+	align-items: center;
+}
+
 .textarea__field {
-	width: 100%;
+	width: 60%;
 	display: block;
 	box-shadow: 5px 10px 15px rgba(172, 166, 166, 0.8);
 	outline: none;
@@ -136,10 +137,10 @@ select {
 	font-weight: 400;
 	font-family: inherit;
 	color: #695c79;
-	margin-bottom: 30px;
+	margin-right: 16px;
 }
 
 .textarea__buttons-wrap {
-	text-align: end;
+	width: 40%;
 }
 </style>

@@ -27,7 +27,6 @@ export const useStoreAuth = defineStore('storeAuth ', {
 			createUserWithEmailAndPassword(auth, credentials.email, credentials.password)
 				.then((userCredential) => {
 					const user = userCredential.user;
-					// console.log(user);
 				})
 				.catch((error) => {
 					const errorCode = error.code;
@@ -39,21 +38,15 @@ export const useStoreAuth = defineStore('storeAuth ', {
 			signInWithEmailAndPassword(auth, credentials.email, credentials.password)
 				.then((userCredential) => {
 					const user = userCredential.user;
-					console.log(user, 'user');
 				})
 				.catch((error) => {
-					// console.log('error', error.message);
 					alert('User doesent exist, please registred first');
 				});
 		},
 		logOutUser() {
 			signOut(auth)
-				.then(() => {
-					// console.log('sign out');
-				})
-				.catch((error) => {
-					// console.log(error.message);
-				});
+				.then(() => {})
+				.catch((error) => {});
 		},
 	},
 });

@@ -4,7 +4,7 @@
 		<div class="modal__card" ref="closeModalRef">
 			<div class="modal__card-header">
 				<p class="modal__card-title">Delete note?</p>
-				<button class="modal__btn-close" aria-label="close" @click="$emit('update:modelValue', (deleteNote = false))"></button>
+				<button class="modal__btn-close" aria-label="close" @click="closeModal"></button>
 			</div>
 			<div class="modal__card-body">
 				<p>Are you sure you want to delete this note?</p>
@@ -33,7 +33,11 @@ const props = defineProps({
 });
 
 //emits
-const emits = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue']);
+
+const closeModal = () => {
+	emit('update:modelValue', false);
+};
 </script>
 
 <style scoped>
@@ -104,24 +108,21 @@ const emits = defineEmits(['update:modelValue']);
 	flex-grow: 0;
 	flex-shrink: 0;
 	font-size: 0;
-	height: 20px;
-	max-height: 20px;
-	max-width: 20px;
-	min-height: 20px;
-	min-width: 20px;
+	height: 24px;
+
 	outline: 0;
 	position: relative;
 	vertical-align: top;
-	width: 20px;
+	width: 24px;
 	position: relative;
 }
 
 .modal__btn-close::before {
 	position: absolute;
 	content: 'x';
-	font-size: 16px;
+	font-size: 15px;
 	top: 2px;
-	right: 5px;
+	right: 8px;
 	color: #363636;
 }
 
