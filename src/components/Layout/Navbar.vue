@@ -38,6 +38,7 @@ const logOut = () => {
 	top: 0;
 	left: 0;
 	right: 0; */
+	position: relative;
 }
 
 .header__wrap {
@@ -86,5 +87,46 @@ const logOut = () => {
 }
 .is-active {
 	color: #f39c12;
+}
+
+@media only screen and (max-width: 1024px) {
+	.header__logo {
+		font-size: 28px;
+	}
+	.nav__link {
+		font-size: 18px;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.header__logo {
+		font-size: 28px;
+	}
+	/* .nav {
+		position: absolute;
+		top: 80px;
+		top: 63px;
+		left: 0%;
+		width: 100%;
+		z-index: 1;
+		padding: 20px;
+		background-color: #44495f;
+	}
+	.nav__wrap {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.nav__list {
+		display: flex;
+		align-items: flex-start;
+		flex-direction: column;
+		padding: 0;
+	}
+	.nav__item {
+		margin-bottom: 8px;
+	}
+	.nav__link {
+		font-size: 18px;
+	} */
 }
 </style>

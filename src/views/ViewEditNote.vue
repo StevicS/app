@@ -1,5 +1,5 @@
 <template>
-	<AddEditNote :textValue="noteContent" :categoryValue="category" @update:textValue="noteContent = $event" @update:categoryValue="category = $event">
+	<AddEditNote :textValue="noteContent" :categoryValue="category" @update:textValue="noteContent = $event" @update:categoryValue="category = $event" editTitle="Edit Note">
 		<template #button>
 			<button @click="$router.back()" class="textarea__submit-btn button-cancel">Cancel</button>
 			<button @click="handleSaveClicked" class="textarea__submit-btn button-save">Save note</button>

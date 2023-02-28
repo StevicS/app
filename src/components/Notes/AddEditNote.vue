@@ -1,8 +1,11 @@
 <template>
 	<div class="main">
+		<div class="main__title-wrap">
+			<h1 class="main__title-wrap" v-if="editTitle">{{ editTitle }}</h1>
+		</div>
 		<form action="" @submit.prevent="onSubmit" ref="formNote">
 			<div class="select">
-				<select :value="props.categoryValue" @input="emitCategory">
+				<select class="select__element" :value="props.categoryValue" @input="emitCategory">
 					<option value="Racuni" selected>Racuni</option>
 					<option value="Hrana">Hrana</option>
 					<option value="Gorivo">Gorivo</option>
@@ -13,10 +16,11 @@
 				</select>
 			</div>
 
-			<div class="textarea">
-				<div class="textarea__wrap">
-					<input :value="props.textValue" @input="emitText" class="textarea__field" v-autofocus name="" id="" type="number" />
-					<div class="textarea__buttons-wrap">
+			<div class="input">
+				<div class="input__wrap">
+					<label for="userInput"></label>
+					<input :value="props.textValue" @input="emitText" class="input__field" v-autofocus name="" id="userInput" type="number" />
+					<div class="input__buttons-wrap">
 						<slot name="button" />
 					</div>
 				</div>
@@ -37,6 +41,9 @@ const props = defineProps({
 	categoryValue: {
 		type: String,
 		required: true,
+	},
+	editTitle: {
+		type: String,
 	},
 });
 
@@ -59,34 +66,16 @@ const onSubmit = () => {
 };
 </script>
 
-<style setup>
-/* :root {
-	--background-gradient: linear-gradient(30deg, #f39c12 30%, #f1c40f);
-	--gray: #34495e;
-	--darkgray: #2c3e50;
-} */
-
+<style scoped>
 .main {
 	margin: 0 auto;
 	max-width: 1100px;
 	width: 100%;
 }
 
-select {
-	/* Reset Select */
-	display: block;
-	appearance: none;
-	outline: 0;
-	border: 0;
-	box-shadow: none;
-	/* Personalize */
-	flex: 1;
-	padding: 0 1em;
-	color: #fff;
-	background-color: var(--darkgray);
-	background-image: none;
-	cursor: pointer;
-	background-color: #617385;
+.main__title-wrap {
+	text-align: center;
+	margin-bottom: 28px;
 }
 
 .select {
@@ -115,18 +104,31 @@ select {
 	color: #f39c12;
 }
 
-.textarea {
+.select__element {
+	display: block;
+	appearance: none;
+	outline: 0;
+	border: 0;
+	box-shadow: none;
+	flex: 1;
+	padding: 0 14px;
+	color: #fff;
+	cursor: pointer;
+	background-color: #617385;
+}
+
+.input {
 	max-width: 530px;
 	width: 100%;
 	margin: 0 auto 40px;
 }
 
-.textarea__wrap {
+.input__wrap {
 	display: flex;
 	align-items: center;
 }
 
-.textarea__field {
+.input__field {
 	width: 60%;
 	display: block;
 	box-shadow: 5px 10px 15px rgba(172, 166, 166, 0.8);
@@ -140,7 +142,7 @@ select {
 	margin-right: 16px;
 }
 
-.textarea__buttons-wrap {
+.input__buttons-wrap {
 	width: 40%;
 }
 </style>

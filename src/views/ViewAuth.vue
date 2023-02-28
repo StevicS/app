@@ -1,22 +1,22 @@
 <template>
-	<div class="box">
-		<div class="auth-buttons">
-			<div class="auth-buttons__wrap">
-				<button class="auth-buttons__btn" :class="{ 'is-active': !register }" @click="register = false">Login</button>
-				<button class="auth-buttons__btn" :class="{ 'is-active': register }" @click="register = true">Register</button>
+	<div class="auth-page">
+		<div class="auth-page__buttons">
+			<div class="auth-page__buttons-wrap">
+				<button class="auth-page__button" :class="{ 'is-active': !register }" @click="register = false">Login</button>
+				<button class="auth-page__button" :class="{ 'is-active': register }" @click="register = true">Register</button>
 			</div>
 		</div>
-		<form @submit.prevent="onSubmit">
-			<div class="input-box">
-				<input v-model="credentials.email" type="email" name="" required />
-				<label for="">Email</label>
+		<form class="auth-page__form" @submit.prevent="onSubmit">
+			<div class="auth-page__input-wrap">
+				<input class="auth-page__input" v-model="credentials.email" type="email" required id="loginEmail" />
+				<label class="auth-page__label" for="loginEmail">Email</label>
 			</div>
-			<div class="input-box">
-				<input v-model="credentials.password" type="password" name="" required />
-				<label for="">Password</label>
+			<div class="auth-page__input-wrap">
+				<input class="auth-page__input" v-model="credentials.password" type="password" required id="loginPassword" />
+				<label class="auth-page__label" for="loginPassword">Password</label>
 			</div>
-			<div class="auth-buttons__wrap">
-				<button type="submit">{{ formTitle }}</button>
+			<div class="auth-page__buttons-wrap">
+				<button class="auth-page__btn-submit" type="submit">{{ formTitle }}</button>
 			</div>
 		</form>
 	</div>
@@ -58,14 +58,7 @@ const onSubmit = () => {
 </script>
 
 <style scoped>
-h1 {
-	color: white;
-	margin: 0;
-	padding: 30px 0;
-	text-align: center;
-}
-
-.box {
+.auth-page {
 	background: rgba(#41394b, 0.8);
 	width: 600px;
 	height: 320px;
@@ -76,15 +69,11 @@ h1 {
 	margin: 80px auto 30px;
 }
 
-.auth-buttons {
+.auth-page__buttons-wrap {
 	text-align: center;
 }
 
-.auth-buttons__wrap {
-	text-align: center;
-}
-
-.auth-buttons__btn {
+.auth-page__button {
 	border: none;
 	outline: none;
 	background: transparent;
@@ -94,11 +83,12 @@ h1 {
 	color: aliceblue;
 }
 
-.input-box {
+.auth-page__input-wrap {
 	position: relative;
+	font: inherit;
 }
 
-.input-box input {
+.auth-page__input {
 	border-style: none;
 	background: transparent;
 	border-bottom: 1px solid white;
@@ -107,11 +97,12 @@ h1 {
 	outline: none;
 	padding: 10px 0;
 	color: white;
-	font-size: 18px;
+	font-size: 22px;
 	margin-bottom: 30px;
+	font-family: 'Share Tech', sans-serif;
 }
 
-.input-box label {
+.auth-page__label {
 	color: white;
 	position: absolute;
 	padding: 10px 0;
@@ -119,17 +110,18 @@ h1 {
 	left: 0;
 	pointer-events: none;
 	transition: 0.5s;
+	font-size: 18px;
 }
 
-.input-box input:focus ~ label,
-.input-box input:valid ~ label {
+.auth-page__input:focus ~ label,
+.auth-page__input:valid ~ label {
 	color: rgb(57, 255, 20);
 	font-size: 16px;
 	top: -20px;
 	transition: 0.5s;
 }
 
-.box button[type='submit'] {
+.auth-page__btn-submit {
 	background: transparent;
 	color: white;
 	border-spacing: none;
@@ -143,7 +135,7 @@ h1 {
 	font-family: 'Share Tech', sans-serif;
 }
 
-.box button[type='submit']:hover {
+.auth-page__btn-submit:hover {
 	background: rgb(57, 255, 20);
 	border: 1px solid rgb(57, 255, 20);
 	transition: 0.3s;
