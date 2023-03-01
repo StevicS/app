@@ -101,7 +101,7 @@ const onSubmit = () => {
 }
 
 .select:hover::after {
-	color: #f39c12;
+	color: var(--orange);
 }
 
 .select__element {
@@ -134,6 +134,7 @@ const onSubmit = () => {
 	box-shadow: 5px 10px 15px rgba(172, 166, 166, 0.8);
 	outline: none;
 	border: none;
+	border-radius: 6px;
 	padding: 10px;
 	font-size: 22px;
 	font-weight: 400;

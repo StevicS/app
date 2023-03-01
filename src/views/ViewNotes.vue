@@ -1,7 +1,7 @@
 <template>
 	<AddEditNote :textValue="textValue" :categoryValue="categoryValue" @submitNote="submitNoteValue" @update:textValue="handleTextValueUpdate" @update:categoryValue="handleCategoryValueUpdate">
 		<template #button>
-			<button class="textarea__submit-btn" type="submit">Add note</button>
+			<button class="input__submit-btn" type="submit">Add note</button>
 		</template>
 	</AddEditNote>
 	<div class="loading">
@@ -42,9 +42,9 @@ const handleCategoryValueUpdate = (newValue) => {
 // };
 
 const submitNoteValue = (formNote) => {
-	// if (textValue.value.trim() === '') {
-	// 	return;
-	// }
+	if (textValue.value.trim() === '') {
+		return;
+	}
 	storeNotes.addNote(textValue.value, categoryValue.value);
 	// const user = {
 	// 	id: 'id' + new Date().getTime(),
@@ -57,14 +57,14 @@ const submitNoteValue = (formNote) => {
 </script>
 
 <style>
-.textarea__submit-btn {
+.input__submit-btn {
 	display: block;
 	margin-left: auto;
 	font-family: inherit;
 	padding: 10px;
 	border: none;
 	outline: none;
-	border-radius: 12px;
+	border-radius: 6px;
 	font-size: 22px;
 	color: #695c79;
 	cursor: pointer;
@@ -72,8 +72,8 @@ const submitNoteValue = (formNote) => {
 	transition-property: color, background-color;
 }
 
-.textarea__submit-btn:hover {
-	color: #f39c12;
+.input__submit-btn:hover {
+	color: var(--orange);
 	background-color: #695c79;
 }
 

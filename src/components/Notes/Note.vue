@@ -24,12 +24,8 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { useStoreNotes } from '@/stores/storeNotes';
 import { useDateFormat } from '@vueuse/core';
 import DeleteNoteModal from './DeleteNoteModal.vue';
-
-// store
-const storeNotes = useStoreNotes();
 
 // props
 const props = defineProps({
@@ -42,7 +38,7 @@ const deleteNote = ref(false);
 
 // date formated
 const dateFormatted = computed(() => {
-	let date = new Date();
+	let date = new Date(parseInt(props.note.date));
 	return useDateFormat(date, 'DD-MM-YYYY @HH:mm:ss').value;
 });
 </script>
@@ -55,7 +51,7 @@ const dateFormatted = computed(() => {
 	color: #fff;
 	margin: 0 auto;
 	overflow: hidden;
-	border-radius: 0px;
+	border-radius: 6px;
 	box-shadow: 0px 10px 20px -9px rgba(0, 0, 0, 0.5);
 	text-align: center;
 	transition: all 0.4s;
@@ -100,7 +96,7 @@ const dateFormatted = computed(() => {
 	height: 2px;
 	margin: 20px auto;
 	border: 0;
-	background: #bda26b;
+	background: var(--orange);
 	transition: all 0.2s;
 }
 .note-card__text-wrap {
@@ -128,8 +124,7 @@ const dateFormatted = computed(() => {
 	transition: 0.3s transform ease;
 }
 .note-card__btn:hover {
-	color: #f39c12;
-	transform: scale(1.1);
+	color: var(--orange);
 }
 .note-card__info {
 	position: absolute;
@@ -200,12 +195,12 @@ const dateFormatted = computed(() => {
 	.note-card__info {
 		text-align: center;
 	}
-	.note-card__info ul {
+	.note-card__list {
 		width: 100%;
 		margin: 0;
 		box-sizing: border-box;
 	}
-	.note-card__info li {
+	.note-card__item {
 		width: 49%;
 		display: inline-block;
 		box-sizing: border-box;

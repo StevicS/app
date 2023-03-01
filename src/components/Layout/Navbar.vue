@@ -2,28 +2,38 @@
 	<header class="header">
 		<div class="header__wrap">
 			<RouterLink to="/" class="header__logo">expanses track</RouterLink>
-			<nav class="nav">
+			<nav class="nav" :class="{ 'nav--active': showMobile }">
 				<div class="nav__wrap">
 					<ul class="nav__list">
-						<li class="nav__item"><RouterLink to="/" active-class="is-active" class="nav__link">notes</RouterLink></li>
-						<li class="nav__item"><RouterLink to="/calc" active-class="is-active" class="nav__link">expanses</RouterLink></li>
+						<li class="nav__item" @click="showMobile = !showMobile"><RouterLink to="/" active-class="nav__link--active" class="nav__link">notes</RouterLink></li>
+						<li class="nav__item" @click="showMobile = !showMobile"><RouterLink to="/calc" active-class="nav__link--active" class="nav__link">expanses</RouterLink></li>
 					</ul>
 					<button v-if="storeAuth.user.id" @click="logOut" class="nav__logout">logout - {{ storeAuth.user.email }}</button>
 				</div>
 			</nav>
+			<button class="header__hamburger-menu" :class="{ active: showMobile }" @click="showMobile = !showMobile">
+				<span class="header__hamburger-span"></span>
+				<span class="header__hamburger-span"></span>
+				<span class="header__hamburger-span"></span>
+			</button>
 		</div>
 	</header>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { useStoreAuth } from '@/stores/storeAuth';
 
 // store
 const storeAuth = useStoreAuth();
 
+let showMobile = ref(false);
+
 // logout user
 const logOut = () => {
 	storeAuth.logOutUser();
+	showMobile = !showMobile;
+	console.log(showMobile);
 };
 </script>
 
@@ -34,10 +44,6 @@ const logOut = () => {
 	display: flex;
 	align-items: center;
 	box-shadow: 5px 10px 15px rgba(172, 166, 166, 0.8);
-	/* position: absolute;
-	top: 0;
-	left: 0;
-	right: 0; */
 	position: relative;
 }
 
@@ -85,8 +91,12 @@ const logOut = () => {
 	padding: 4px 10px;
 	cursor: pointer;
 }
-.is-active {
-	color: #f39c12;
+.nav__link--active {
+	color: var(--orange);
+}
+
+.header__hamburger-menu {
+	display: none;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -102,15 +112,23 @@ const logOut = () => {
 	.header__logo {
 		font-size: 28px;
 	}
-	/* .nav {
+
+	.nav {
 		position: absolute;
 		top: 80px;
-		top: 63px;
-		left: 0%;
+		top: 62px;
+		left: -100%;
 		width: 100%;
 		z-index: 1;
-		padding: 20px;
-		background-color: #44495f;
+		padding: 20px 20px 30px;
+		/* background-image: linear-gradient(135deg, #7987c7 0%, #140f1a 100%); */
+		background-image: linear-gradient(15deg, #b3bada 0%, #140f1a 100%);
+		/* background-color: #7987c7; */
+		transition: left 0.3s ease;
+	}
+
+	.nav--active {
+		left: 0%;
 	}
 	.nav__wrap {
 		flex-direction: column;
@@ -127,6 +145,49 @@ const logOut = () => {
 	}
 	.nav__link {
 		font-size: 18px;
-	} */
+	}
+
+	.header__hamburger-menu {
+		display: inline-block;
+		cursor: pointer;
+		background-color: transparent;
+		border: none;
+		padding-top: 8px;
+		margin: 0;
+	}
+	.header__hamburger-span {
+		display: block;
+		width: 30px;
+		height: 4px;
+		margin-bottom: 5px;
+		position: relative;
+
+		background: var(--color-text);
+		border-radius: 3px;
+		z-index: 1;
+	}
+
+	.header__hamburger-menu.active {
+		padding-top: 0;
+	}
+
+	.header__hamburger-menu.active .header__hamburger-span:first-child {
+		transform: rotate(45deg);
+		top: 11px;
+		left: 6px;
+		background-color: var(--orange);
+	}
+
+	.header__hamburger-menu.active .header__hamburger-span:nth-child(2) {
+		width: 0;
+		opacity: 0;
+	}
+
+	.header__hamburger-menu.active .header__hamburger-span:last-child {
+		transform: rotate(-45deg);
+		top: -2px;
+		left: 6px;
+		background-color: var(--orange);
+	}
 }
 </style>

@@ -75,7 +75,8 @@ const totalCategoryCount = computed(() => {
 	padding: 0 40px;
 }
 .expanses__title {
-	font-size: 40px;
+	font-size: 32px;
+	margin-bottom: 8px;
 }
 .expanses__list {
 	margin-bottom: 40px;
@@ -84,6 +85,33 @@ const totalCategoryCount = computed(() => {
 	font-size: 20px;
 }
 .expanses__total {
-	font-size: 32px;
+	font-size: 28px;
+}
+
+@media only screen and (max-width: 1024px) {
+	.expanses__title {
+		font-size: 28px;
+	}
+	.expanses__text {
+		font-size: 16px;
+	}
+	.expanses__total {
+		font-size: 22px;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.expanses {
+		padding: 0;
+	}
+	.expanses__title {
+		font-size: 24px;
+	}
+	.expanses__text {
+		font-size: 16px;
+	}
+	.expanses__total {
+		font-size: 20px;
+	}
 }
 </style>

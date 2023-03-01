@@ -55,9 +55,6 @@ const closeModal = () => {
 	top: 0;
 }
 
-/* .modal--active {
-	display: flex;
-} */
 .modal__background {
 	bottom: 0;
 	left: 0;
