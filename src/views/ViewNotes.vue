@@ -19,11 +19,6 @@ import { useStoreNotes } from '@/stores/storeNotes';
 // store
 const storeNotes = useStoreNotes();
 
-// mounted
-// onMounted(() => {
-// 	storedNotes.init();
-// });
-
 const textValue = ref('');
 let categoryValue = ref('Racuni');
 
@@ -35,24 +30,12 @@ const handleCategoryValueUpdate = (newValue) => {
 	categoryValue.value = newValue;
 };
 
-// methods
-// const addNote = () => {
-// 	storeNotes.addNote(newNote.value);
-
-// };
-
-const submitNoteValue = (formNote) => {
+const submitNoteValue = () => {
 	if (textValue.value.trim() === '') {
 		return;
 	}
 	storeNotes.addNote(textValue.value, categoryValue.value);
-	// const user = {
-	// 	id: 'id' + new Date().getTime(),
-	// 	content: textValue.value,
-	// 	category: categoryValue.value,
-	// };
-	// storeNotes.notes.push(user);
-	formNote.value.reset();
+	textValue.value = '';
 };
 </script>
 

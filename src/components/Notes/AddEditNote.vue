@@ -3,7 +3,7 @@
 		<div class="main__title-wrap">
 			<h1 class="main__title-wrap" v-if="editTitle">{{ editTitle }}</h1>
 		</div>
-		<form action="" @submit.prevent="onSubmit" ref="formNote">
+		<form action="" @submit.prevent="onSubmit">
 			<div class="select">
 				<select class="select__element" :value="props.categoryValue" @input="emitCategory">
 					<option value="Racuni" selected>Racuni</option>
@@ -46,8 +46,6 @@ const props = defineProps({
 	},
 });
 
-const formNote = ref(null);
-
 // emits
 const emitCategory = (event) => {
 	emit('update:categoryValue', event.target.value);
@@ -60,7 +58,7 @@ const emitText = (event) => {
 const emit = defineEmits(['submitNote', 'update:textValue', 'update:categoryValue']);
 
 const onSubmit = () => {
-	emit('submitNote', formNote);
+	emit('submitNote');
 };
 </script>
 
