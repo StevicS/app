@@ -5,7 +5,7 @@
 			<ul class="expanses__list">
 				<li class="expanses__item" v-for="(categoryCount, category) in categoryCounts" :key="category">
 					<p class="expanses__text">{{ category }}</p>
-					<p class="expanses__text">Ukupno: {{ categoryCount.total }}</p>
+					<p class="expanses__text">Ukupno: {{ categoryCount.total }}din</p>
 				</li>
 			</ul>
 			<p class="expanses__total">SVI TROSKOVI ZAJEDNO {{ totalCategoryCount }}din</p>
