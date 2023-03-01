@@ -54,7 +54,6 @@ const closeModal = () => {
 	right: 0;
 	top: 0;
 }
-
 .modal__background {
 	bottom: 0;
 	left: 0;
@@ -63,7 +62,6 @@ const closeModal = () => {
 	top: 0;
 	background-color: rgba(0, 0, 0, 0.5);
 }
-
 .modal__card {
 	display: flex;
 	flex-direction: column;
@@ -73,13 +71,11 @@ const closeModal = () => {
 	max-width: 440px;
 	width: 100%;
 }
-
 .modal__card-header {
 	border-bottom: 1px solid #dbdbdb;
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
 }
-
 .modal__card-title {
 	color: #363636;
 	flex-grow: 1;
@@ -87,7 +83,6 @@ const closeModal = () => {
 	font-size: 1.5rem;
 	line-height: 1;
 }
-
 .modal__btn-close {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -106,14 +101,12 @@ const closeModal = () => {
 	flex-shrink: 0;
 	font-size: 0;
 	height: 24px;
-
 	outline: 0;
 	position: relative;
 	vertical-align: top;
 	width: 24px;
 	position: relative;
 }
-
 .modal__btn-close::before {
 	position: absolute;
 	content: 'x';
@@ -122,7 +115,6 @@ const closeModal = () => {
 	right: 8px;
 	color: #363636;
 }
-
 .modal__card-body {
 	-webkit-overflow-scrolling: touch;
 	background-color: #fff;
@@ -131,19 +123,16 @@ const closeModal = () => {
 	overflow: auto;
 	padding: 20px;
 }
-
 .modal__card-body p {
 	color: #363636;
 	font-size: 22px;
 }
-
 .modal__card-footer {
 	border-bottom-left-radius: 6px;
 	border-bottom-right-radius: 6px;
 	border-top: 1px solid #dbdbdb;
 	justify-content: flex-end !important;
 }
-
 .modal__card-footer,
 .modal__card-header {
 	align-items: center;
@@ -154,7 +143,6 @@ const closeModal = () => {
 	padding: 20px;
 	position: relative;
 }
-
 .modal__card-footer-btn {
 	margin-right: 15px;
 	border: 1px solid #363636;
@@ -167,8 +155,20 @@ const closeModal = () => {
 .modal__card-footer-btn:hover {
 	opacity: 0.6;
 }
-
 .modal__card-footer-btn--color {
 	background-color: rgb(223, 39, 39);
+}
+
+@media only screen and (max-width: 768px) {
+	.modal {
+		padding: 16px;
+	}
+	.modal__card {
+		max-width: 340px;
+		width: 100%;
+	}
+	.modal__card-body {
+		padding: 16px 8px;
+	}
 }
 </style>

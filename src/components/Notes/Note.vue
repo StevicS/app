@@ -82,7 +82,7 @@ const dateFormatted = computed(() => {
 	width: 80%;
 }
 .note-card__category-title {
-	font-size: 1.9em;
+	font-size: 28px;
 	font-weight: 400;
 	letter-spacing: 1px;
 	margin-bottom: 0;
@@ -108,7 +108,7 @@ const dateFormatted = computed(() => {
 	margin-bottom: 20px;
 }
 .note-card__text {
-	font-size: 22px;
+	font-size: 20px;
 }
 .note-card__btn {
 	z-index: 40;
@@ -156,7 +156,7 @@ const dateFormatted = computed(() => {
 	margin: 0 5px 0 0;
 	padding: 3px 0 15px 0px;
 	display: inline-block;
-	font-size: 0.8em;
+	font-size: 14px;
 }
 .note-card__item-icon {
 	position: relative;
@@ -221,10 +221,10 @@ const dateFormatted = computed(() => {
 		height: 300px;
 	}
 	.note-card__title {
-		font-size: 1.3em;
+		font-size: 22px;
 	}
 	.note-card__text {
-		font-size: 0.8em;
+		font-size: 16px;
 	}
 }
 

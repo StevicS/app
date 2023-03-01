@@ -33,7 +33,6 @@ const router = createRouter({
 	routes,
 });
 
-// nav guards
 router.beforeEach(async (to, from) => {
 	const storeAuth = useStoreAuth();
 	if (!storeAuth.user.id && to.name !== 'auth') {

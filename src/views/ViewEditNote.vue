@@ -1,8 +1,8 @@
 <template>
 	<AddEditNote :textValue="noteContent" :categoryValue="category" @update:textValue="noteContent = $event" @update:categoryValue="category = $event" editTitle="Edit Note">
 		<template #button>
-			<button @click="$router.back()" class="textarea__submit-btn button-cancel">Cancel</button>
-			<button @click="handleSaveClicked" class="textarea__submit-btn button-save">Save note</button>
+			<button @click="$router.back()" class="input__submit-btn button-cancel">Cancel</button>
+			<button @click="handleSaveClicked" class="input__submit-btn button-save">Save note</button>
 		</template>
 	</AddEditNote>
 </template>
@@ -40,5 +40,12 @@ const handleSaveClicked = () => {
 }
 .button-cancel {
 	margin-right: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+	.input__submit-btn {
+		display: inline-block;
+		margin-top: 18px;
+	}
 }
 </style>

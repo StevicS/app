@@ -10,21 +10,7 @@ let getNotesSnapshot = null;
 export const useStoreNotes = defineStore('storeNotes', {
 	state: () => {
 		return {
-			notes: [
-				// {
-				// 	id: 'id1',
-				// 	content: 'potrosnja goriva 6000din ',
-				// 	category: 'fuel',
-				// 	date: '13.02.1456',
-				// },
-				// {
-				// 	id: 'id2',
-				// 	content: '22000din ',
-				// 	category: 'bills',
-				// 	date: '23.04.1290',
-				// },
-			],
-
+			notes: [],
 			notesLoaded: false,
 		};
 	},
@@ -55,30 +41,16 @@ export const useStoreNotes = defineStore('storeNotes', {
 					});
 					this.notesLoaded = true;
 				},
-				(error) => {
-					console.log(error.message);
-				}
+				(error) => {}
 			);
 		},
 		clearNotes() {
 			this.notes = [];
-			if (getNotesSnapshot) getNotesSnapshot(); // unsubscribe from active listener
+			if (getNotesSnapshot) getNotesSnapshot();
 		},
 		async addNote(newNoteContent, newCategorValue) {
 			let currentDate = new Date().getTime();
 			let date = currentDate.toString();
-
-			// const userNote = {
-			// 	id: id,
-			// 	content: newNoteContent,
-			// };
-			// this.notes.unshift(userNote);
-
-			// await setDoc(doc(noteCollectionRef, id), {
-			// 	content: newNoteContent,
-			// 	// id: id
-			// 	id,
-			// });
 
 			await addDoc(noteCollectionRef, {
 				content: newNoteContent,
@@ -93,15 +65,7 @@ export const useStoreNotes = defineStore('storeNotes', {
 			});
 		},
 		async upadateNote(id, category, content) {
-			// let index = this.notes.findIndex((note) => {
-			// 	return note.id === id;
-			// });
-			// console.log(content);
-			// this.notes[index].content = content;
-			// this.notes[index].category = category;
-
 			await updateDoc(doc(noteCollectionRef, id), {
-				// content: content
 				content,
 				category,
 			});

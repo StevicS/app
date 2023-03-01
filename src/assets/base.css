@@ -1,6 +1,7 @@
 :root {
 	--color-text: rgba(235, 235, 235, 0.64);
 	--orange: #f39c12;
+	--neon-green: rgb(57, 255, 20);
 }
 
 *,

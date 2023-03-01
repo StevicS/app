@@ -69,12 +69,10 @@ const onSubmit = () => {
 	box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.8);
 	margin: 80px auto 30px;
 }
-
 .auth-page__buttons-wrap {
 	text-align: center;
 	margin-bottom: 10px;
 }
-
 .auth-page__button {
 	border: none;
 	outline: none;
@@ -84,12 +82,10 @@ const onSubmit = () => {
 	font-size: 20px;
 	color: aliceblue;
 }
-
 .auth-page__input-wrap {
 	position: relative;
 	font: inherit;
 }
-
 .auth-page__input {
 	border-style: none;
 	background: transparent;
@@ -103,14 +99,12 @@ const onSubmit = () => {
 	margin-bottom: 30px;
 	font-family: 'Share Tech', sans-serif;
 }
-
 .auth-page__input:-webkit-autofill,
 .auth-page__input:-webkit-autofill:hover,
 .auth-page__input:-webkit-autofill:focus {
 	transition: background-color 5000s ease-in-out 0s;
 	-webkit-text-fill-color: #fff !important;
 }
-
 .auth-page__label {
 	color: white;
 	position: absolute;
@@ -121,20 +115,18 @@ const onSubmit = () => {
 	transition: 0.5s;
 	font-size: 18px;
 }
-
 .auth-page__input:focus ~ label,
 .auth-page__input:valid ~ label {
-	color: rgb(57, 255, 20);
+	color: var(--neon-green);
 	font-size: 16px;
 	top: -20px;
 	transition: 0.5s;
 }
-
 .auth-page__btn-submit {
 	background: transparent;
-	color: white;
+	color: #fff;
 	border-spacing: none;
-	border: 1px solid white;
+	border: 1px solid #fff;
 	padding: 10px 20px;
 	font-size: 16px;
 	border-radius: 12px;
@@ -143,16 +135,14 @@ const onSubmit = () => {
 	transition: 0.3s;
 	font-family: 'Share Tech', sans-serif;
 }
-
 .auth-page__btn-submit:hover {
-	background: rgb(57, 255, 20);
-	border: 1px solid rgb(57, 255, 20);
+	background-color: var(--neon-green);
+	border: 1px solid var(--neon-green);
 	transition: 0.3s;
 	color: #000;
 }
-
 .is-active {
-	color: rgb(57, 255, 20);
+	color: var(--neon-green);
 }
 
 @media only screen and (max-width: 768px) {

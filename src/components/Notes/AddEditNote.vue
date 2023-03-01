@@ -15,7 +15,6 @@
 					<option value="Drugo">Drugo</option>
 				</select>
 			</div>
-
 			<div class="input">
 				<div class="input__wrap">
 					<label for="userInput"></label>
@@ -50,7 +49,6 @@ const props = defineProps({
 const formNote = ref(null);
 
 // emits
-
 const emitCategory = (event) => {
 	emit('update:categoryValue', event.target.value);
 };
@@ -115,6 +113,7 @@ const onSubmit = () => {
 	color: #fff;
 	cursor: pointer;
 	background-color: #617385;
+	font: inherit;
 }
 
 .input {
@@ -145,5 +144,19 @@ const onSubmit = () => {
 
 .input__buttons-wrap {
 	width: 40%;
+}
+
+@media only screen and (max-width: 768px) {
+	.input__wrap {
+		flex-wrap: wrap;
+	}
+	.input__buttons-wrap {
+		width: 100%;
+		text-align: right;
+	}
+
+	.input__submit-btn {
+		margin-left: 0;
+	}
 }
 </style>

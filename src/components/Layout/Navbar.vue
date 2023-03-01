@@ -1,7 +1,7 @@
 <template>
 	<header class="header">
 		<div class="header__wrap">
-			<RouterLink to="/" class="header__logo">expanses track</RouterLink>
+			<RouterLink to="/" class="header__logo">expanse track</RouterLink>
 			<nav class="nav" :class="{ 'nav--active': showMobile }">
 				<div class="nav__wrap">
 					<ul class="nav__list">
@@ -31,9 +31,8 @@ let showMobile = ref(false);
 
 // logout user
 const logOut = () => {
+	showMobile.value = false;
 	storeAuth.logOutUser();
-	showMobile = !showMobile;
-	console.log(showMobile);
 };
 </script>
 
@@ -46,7 +45,6 @@ const logOut = () => {
 	box-shadow: 5px 10px 15px rgba(172, 166, 166, 0.8);
 	position: relative;
 }
-
 .header__wrap {
 	display: flex;
 	align-items: center;
@@ -62,13 +60,11 @@ const logOut = () => {
 	font-size: 38px;
 	text-transform: uppercase;
 }
-
 .nav__wrap,
 .nav__list {
 	display: flex;
 	align-items: center;
 }
-
 .nav__item {
 	text-decoration: none;
 	list-style: none;
@@ -77,7 +73,6 @@ const logOut = () => {
 	font-size: 20px;
 	text-transform: uppercase;
 }
-
 .nav__logout {
 	background-color: transparent;
 	border: none;
@@ -94,7 +89,6 @@ const logOut = () => {
 .nav__link--active {
 	color: var(--orange);
 }
-
 .header__hamburger-menu {
 	display: none;
 }
@@ -112,7 +106,6 @@ const logOut = () => {
 	.header__logo {
 		font-size: 28px;
 	}
-
 	.nav {
 		position: absolute;
 		top: 80px;
@@ -121,12 +114,9 @@ const logOut = () => {
 		width: 100%;
 		z-index: 1;
 		padding: 20px 20px 30px;
-		/* background-image: linear-gradient(135deg, #7987c7 0%, #140f1a 100%); */
 		background-image: linear-gradient(15deg, #b3bada 0%, #140f1a 100%);
-		/* background-color: #7987c7; */
 		transition: left 0.3s ease;
 	}
-
 	.nav--active {
 		left: 0%;
 	}
@@ -146,7 +136,6 @@ const logOut = () => {
 	.nav__link {
 		font-size: 18px;
 	}
-
 	.header__hamburger-menu {
 		display: inline-block;
 		cursor: pointer;
@@ -161,28 +150,23 @@ const logOut = () => {
 		height: 4px;
 		margin-bottom: 5px;
 		position: relative;
-
 		background: var(--color-text);
 		border-radius: 3px;
 		z-index: 1;
 	}
-
 	.header__hamburger-menu.active {
 		padding-top: 0;
 	}
-
 	.header__hamburger-menu.active .header__hamburger-span:first-child {
 		transform: rotate(45deg);
 		top: 11px;
 		left: 6px;
 		background-color: var(--orange);
 	}
-
 	.header__hamburger-menu.active .header__hamburger-span:nth-child(2) {
 		width: 0;
 		opacity: 0;
 	}
-
 	.header__hamburger-menu.active .header__hamburger-span:last-child {
 		transform: rotate(-45deg);
 		top: -2px;
