@@ -24,13 +24,6 @@ let contentArr = ref([]);
 const storeNotes = useStoreNotes();
 
 onMounted(() => {
-	// storeNotes.notes.forEach((note) => {
-	// 	const { category, content } = note;
-	// 	categoryArr.value.push(category);
-	// 	contentArr.value.push(parseInt(content));
-	// });
-	// Get current month and year
-
 	storeNotes.notes.forEach((note) => {
 		const { category, content, date } = note;
 		const intDate = parseInt(date);
