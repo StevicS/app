@@ -1,12 +1,12 @@
 <template>
 	<header class="header">
 		<div class="header__wrap">
-			<RouterLink to="/" class="header__logo">expanse track</RouterLink>
+			<RouterLink to="/" class="header__logo">expense track</RouterLink>
 			<nav class="nav" :class="{ 'nav--active': showMobile }">
 				<div class="nav__wrap">
 					<ul class="nav__list">
 						<li class="nav__item" @click="showMobile = !showMobile"><RouterLink to="/" active-class="nav__link--active" class="nav__link">notes</RouterLink></li>
-						<li class="nav__item" @click="showMobile = !showMobile"><RouterLink to="/calc" active-class="nav__link--active" class="nav__link">expanses</RouterLink></li>
+						<li class="nav__item" @click="showMobile = !showMobile"><RouterLink to="/calc" active-class="nav__link--active" class="nav__link">expenses</RouterLink></li>
 					</ul>
 					<button v-if="storeAuth.user.id" @click="logOut" class="nav__logout">logout - {{ storeAuth.user.email }}</button>
 				</div>
