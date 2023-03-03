@@ -1,7 +1,7 @@
 <template>
 	<AddEditNote :textValue="textValue" :categoryValue="categoryValue" @submitNote="submitNoteValue" @update:textValue="handleTextValueUpdate" @update:categoryValue="handleCategoryValueUpdate">
 		<template #button>
-			<button class="input__submit-btn" type="submit">Add note</button>
+			<button class="input__submit-btn" type="submit">Add Note</button>
 		</template>
 	</AddEditNote>
 	<div class="loading">

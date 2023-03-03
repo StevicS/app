@@ -16,6 +16,7 @@
 				</select>
 			</div>
 			<div class="input">
+				<h4 class="input__title">Unesi cenu:</h4>
 				<div class="input__wrap">
 					<label for="userInput"></label>
 					<input :value="props.textValue" @input="emitText" class="input__field" v-autofocus name="" id="userInput" type="number" />
@@ -119,6 +120,10 @@ const onSubmit = () => {
 	width: 100%;
 	margin: 0 auto 40px;
 }
+.input__title {
+	margin-bottom: 10px;
+	font-size: 18px;
+}
 
 .input__wrap {
 	display: flex;
@@ -142,6 +147,7 @@ const onSubmit = () => {
 
 .input__buttons-wrap {
 	width: 40%;
+	display: flex;
 }
 
 @media only screen and (max-width: 768px) {
@@ -151,6 +157,7 @@ const onSubmit = () => {
 	.input__buttons-wrap {
 		width: 100%;
 		text-align: right;
+		display: block;
 	}
 
 	.input__submit-btn {

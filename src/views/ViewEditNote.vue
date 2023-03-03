@@ -9,13 +9,18 @@
 
 <script setup>
 import AddEditNote from '../components/Notes/AddEditNote.vue';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useStoreNotes } from '@/stores/storeNotes';
 import { useRoute, useRouter } from 'vue-router';
 
 // router
 const route = useRoute();
 const router = useRouter();
+
+// console.log(route);
+onMounted(() => {
+	storedNotes.routerValueName = router.currentRoute.value.name;
+});
 
 // store
 const storedNotes = useStoreNotes();

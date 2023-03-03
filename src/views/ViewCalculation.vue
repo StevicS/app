@@ -1,14 +1,18 @@
-<template>
-	<section class="expanses">
-		<div class="expanses__wrap">
-			<h1 class="expanses__title">ZBIR TROSKOVA PO KATEGORIJI</h1>
-			<ul class="expanses__list">
-				<li class="expanses__item" v-for="(categoryCount, category) in categoryCounts" :key="category">
-					<p class="expanses__text">{{ category }}</p>
-					<p class="expanses__text">Ukupno: {{ categoryCount.total }}din</p>
+<!-- <template>
+	<section class="expenses">
+		<div class="expenses__wrap">
+			<h1 class="expenses__title">ZBIR TROSKOVA PO KATEGORIJI</h1>
+			<div class="expenses__buttons-wrap">
+				<button class="expenses__button" @click="sortByPrice">Sortiraj po ceni</button>
+				<button class="expenses__button" @click="sortByTitle">Sortiraj po naslovu</button>
+			</div>
+			<ul class="expenses__list">
+				<li class="expenses__item" v-for="(categoryCount, category) in categoryCounts" :key="category">
+					<p class="expenses__text">{{ category }}</p>
+					<p class="expenses__text">Ukupno: {{ categoryCount.total }}din</p>
 				</li>
 			</ul>
-			<p class="expanses__total">SVI TROSKOVI ZAJEDNO {{ totalCategoryCount }}din</p>
+			<p class="expenses__total">SVI TROSKOVI ZAJEDNO {{ totalCategoryCount }}din</p>
 		</div>
 	</section>
 </template>
@@ -61,49 +65,159 @@ const totalCategoryCount = computed(() => {
 		return total + categoryCount.total;
 	}, 0);
 });
+
+const sortByPrice = () => {
+	const categoryContentArr = Object.entries(categoryCounts.value).map(([category, { total }]) => ({ category, total }));
+	categoryContentArr.sort((a, b) => b.total - a.total);
+	categoryArr.value = categoryContentArr.map(({ category }) => category);
+	contentArr.value = categoryContentArr.map(({ total }) => total);
+};
+
+
+</script> -->
+
+<!-- verzija 2 -->
+
+<template>
+	<section class="expenses">
+		<div class="expenses__wrap">
+			<h1 class="expenses__title">ZBIR TROSKOVA PO KATEGORIJI</h1>
+			<div class="expenses__buttons-wrap">
+				<button class="expenses__button" @click="sortByPrice">Sortiraj po ceni</button>
+				<button class="expenses__button" @click="sortByTitle">Sortiraj po naslovu</button>
+			</div>
+			<TransitionGroup class="expenses__list" name="list" tag="ul">
+				<li class="expenses__item" v-for="(categoryCount, category) in categoryCounts" :key="category">
+					<p class="expenses__text">{{ category }}</p>
+					<p class="expenses__text">Ukupno: {{ categoryCount.total }}din</p>
+				</li>
+			</TransitionGroup>
+			<p class="expenses__total">SVI TROSKOVI ZAJEDNO {{ totalCategoryCount }}din</p>
+		</div>
+	</section>
+</template>
+<script setup>
+import { onMounted, ref, computed } from 'vue';
+import { useStoreNotes } from '@/stores/storeNotes';
+
+const storeNotes = useStoreNotes();
+
+const expenses = ref([]);
+
+onMounted(() => {
+	const currentDate = new Date();
+	const currentMonth = currentDate.getMonth() + 1;
+	const currentYear = currentDate.getFullYear();
+
+	expenses.value = storeNotes.notes
+		.filter((note) => {
+			const noteDate = new Date(parseInt(note.date));
+			return noteDate.getMonth() + 1 === currentMonth && noteDate.getFullYear() === currentYear;
+		})
+		.map((note) => ({
+			category: note.category,
+			content: parseInt(note.content),
+		}));
+});
+
+const categoryCounts = computed(() => {
+	const counts = expenses.value.reduce((acc, expense) => {
+		if (!acc[expense.category]) {
+			acc[expense.category] = { count: 0, total: 0 };
+		}
+		acc[expense.category].count++;
+		acc[expense.category].total += expense.content;
+		return acc;
+	}, {});
+	return Object.entries(counts).reduce((obj, [category, { count, total }]) => {
+		obj[category] = { count, total };
+		return obj;
+	}, {});
+});
+
+const totalCategoryCount = computed(() => {
+	return Object.values(categoryCounts.value).reduce((total, categoryCount) => {
+		return total + categoryCount.total;
+	}, 0);
+});
+
+const sortByPrice = () => {
+	const sorted = expenses.value.sort((a, b) => {
+		return b.content - a.content;
+	});
+	expenses.value = sorted;
+};
+
+const sortByTitle = () => {
+	const sorted = expenses.value.sort((a, b) => {
+		return a.category.localeCompare(b.category);
+	});
+	expenses.value = sorted;
+};
 </script>
 
 <style scoped>
-.expanses {
+.expenses {
 	padding: 0 40px;
 }
-.expanses__title {
+.expenses__title {
 	font-size: 32px;
 	margin-bottom: 8px;
 }
-.expanses__list {
+.expenses__buttons-wrap {
+	margin-bottom: 20px;
+}
+.expenses__button {
+	border: none;
+	outline: none;
+	border-radius: 6px;
+	padding: 10px;
+	font: inherit;
+	color: var(--color-text);
+	background-color: rgb(189, 82, 199);
+	margin-right: 14px;
+	cursor: pointer;
+	transition: opacity 0.3s ease;
+}
+.expenses__button:hover {
+	opacity: 0.6;
+}
+.expenses__list {
 	margin-bottom: 40px;
 }
-.expanses__text {
+.expenses__text {
 	font-size: 20px;
 }
-.expanses__total {
+.expenses__total {
 	font-size: 28px;
+}
+.list-move {
+	transition: all 0.8s;
 }
 
 @media only screen and (max-width: 1024px) {
-	.expanses__title {
+	.expenses__title {
 		font-size: 28px;
 	}
-	.expanses__text {
+	.expenses__text {
 		font-size: 16px;
 	}
-	.expanses__total {
+	.expenses__total {
 		font-size: 22px;
 	}
 }
 
 @media only screen and (max-width: 768px) {
-	.expanses {
+	.expenses {
 		padding: 0;
 	}
-	.expanses__title {
+	.expenses__title {
 		font-size: 24px;
 	}
-	.expanses__text {
+	.expenses__text {
 		font-size: 16px;
 	}
-	.expanses__total {
+	.expenses__total {
 		font-size: 20px;
 	}
 }

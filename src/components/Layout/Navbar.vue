@@ -5,7 +5,7 @@
 			<nav class="nav" :class="{ 'nav--active': showMobile }">
 				<div class="nav__wrap">
 					<ul class="nav__list">
-						<li class="nav__item" @click="showMobile = !showMobile"><RouterLink to="/" active-class="nav__link--active" class="nav__link">notes</RouterLink></li>
+						<li class="nav__item" @click="showMobile = !showMobile"><RouterLink :to="{ path: '/', name: 'notes' }" class="nav__link" exact :class="computedNavLinkClass">notes</RouterLink></li>
 						<li class="nav__item" @click="showMobile = !showMobile"><RouterLink to="/calc" active-class="nav__link--active" class="nav__link">expenses</RouterLink></li>
 					</ul>
 					<button v-if="storeAuth.user.id" @click="logOut" class="nav__logout">logout - {{ storeAuth.user.email }}</button>
@@ -21,11 +21,29 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useStoreAuth } from '@/stores/storeAuth';
+import { useStoreNotes } from '@/stores/storeNotes';
+import { useRoute, useRouter } from 'vue-router';
+
+// router
+const route = useRoute();
+const router = useRouter();
 
 // store
 const storeAuth = useStoreAuth();
+const storedNotes = useStoreNotes();
+
+const computedNavLinkClass = computed(() => {
+	if (storedNotes.routerValueName === 'edit-note') {
+		return 'new-active-class';
+	}
+	if (route.name === 'notes') {
+		return 'nav__link--active';
+	}
+
+	return '';
+});
 
 let showMobile = ref(false);
 
@@ -86,7 +104,8 @@ const logOut = () => {
 	padding: 4px 10px;
 	cursor: pointer;
 }
-.nav__link--active {
+.nav__link--active,
+.new-active-class {
 	color: var(--orange);
 }
 .header__hamburger-menu {

@@ -1,5 +1,5 @@
 <template>
-	<div class="note-card">
+	<div class="note-card" :style="{ 'background-image': noteBackground }">
 		<div class="note-card__category-wrap">
 			<h3 class="note-card__category-title">
 				{{ note.category }}
@@ -27,16 +27,29 @@ import { ref, computed } from 'vue';
 import { useDateFormat } from '@vueuse/core';
 import DeleteNoteModal from './DeleteNoteModal.vue';
 
-// props
 const props = defineProps({
 	note: {
 		type: Object,
 		required: true,
 	},
 });
+
 const deleteNote = ref(false);
 
-// date formated
+const backgrounds = {
+	racuni: 'url(https://unsplash.it/600/800?image=100)',
+	hrana: 'url(https://unsplash.it/600/800?image=102)',
+	gorivo: 'url(https://unsplash.it/600/800?image=85)',
+	restorani: 'url(https://unsplash.it/600/800?image=122)',
+	soping: 'url(https://unsplash.it/600/800?image=103)',
+	auto: 'url(https://unsplash.it/600/800?image=111)',
+	drugo: 'url(https://unsplash.it/600/800?image=51)',
+};
+
+const noteBackground = computed(() => {
+	return backgrounds[props.note.category.toLowerCase()];
+});
+
 const dateFormatted = computed(() => {
 	let date = new Date(parseInt(props.note.date));
 	return useDateFormat(date, 'DD-MM-YYYY @HH:mm:ss').value;

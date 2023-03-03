@@ -12,6 +12,7 @@ export const useStoreNotes = defineStore('storeNotes', {
 		return {
 			notes: [],
 			notesLoaded: false,
+			routerValueName: '',
 		};
 	},
 	actions: {
