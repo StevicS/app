@@ -7,17 +7,50 @@
 	<div class="loading">
 		<h2 v-if="!storeNotes.notesLoaded" class="loading-title">Loading...</h2>
 	</div>
-	<Note v-for="note in storeNotes.notes" :key="note.id" :note="note" />
+	<Note v-for="note in displayStoreNotes" :key="note.id" :note="note" />
+	<div class="pagination" v-if="storeNotes.notesLoaded">
+		<span class="pagination__page">Page {{ currentPage }}</span>
+		<div class="pagination__links-wrap">
+			<RouterLink class="pagination__btn" v-if="previousPage" :to="{ name: 'notes', query: { page: previousPage } }">Previous</RouterLink>
+			<RouterLink class="pagination__btn" v-if="nextPage" :to="{ name: 'notes', query: { page: nextPage } }">Next</RouterLink>
+		</div>
+	</div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import AddEditNote from '../components/Notes/AddEditNote.vue';
 import Note from '../components/Notes/Note.vue';
 import { useStoreNotes } from '@/stores/storeNotes';
+import { useRoute } from 'vue-router';
 
 // store
 const storeNotes = useStoreNotes();
+
+const route = useRoute();
+
+const currentPage = computed(() => {
+	return Number.parseInt(route.query.page || '1');
+});
+
+const previousPage = computed(() => {
+	const previousPage = currentPage.value - 1;
+	const firstPage = 1;
+	return previousPage >= firstPage ? previousPage : undefined;
+});
+
+const nextPage = computed(() => {
+	const nextPage = currentPage.value + 1;
+	const maxPage = Math.ceil(storeNotes.notes.length / 5);
+	return nextPage <= maxPage ? nextPage : undefined;
+});
+
+const displayStoreNotes = computed(() => {
+	const pageNumber = currentPage.value;
+	const firstJob = (pageNumber - 1) * 5;
+	const lastJob = pageNumber * 5;
+	return storeNotes.notes.slice(firstJob, lastJob);
+});
 
 const textValue = ref('');
 let categoryValue = ref('Racuni');
@@ -69,5 +102,23 @@ const submitNoteValue = () => {
 
 .loading-title {
 	font-size: 40px;
+}
+
+.pagination {
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 60px;
+	max-width: 1000px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.pagination__page {
+	font-size: 20px;
+}
+
+.pagination__btn {
+	margin-left: 18px;
+	font-size: 20px;
 }
 </style>
