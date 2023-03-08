@@ -5,8 +5,12 @@
 			<nav class="nav" :class="{ 'nav--active': showMobile }">
 				<div class="nav__wrap">
 					<ul class="nav__list">
-						<li class="nav__item" @click="showMobile = !showMobile"><RouterLink :to="{ path: '/', name: 'notes' }" class="nav__link" exact :class="computedNavLinkClass">notes</RouterLink></li>
-						<li class="nav__item" @click="showMobile = !showMobile"><RouterLink to="/calc" active-class="nav__link--active" class="nav__link">expenses</RouterLink></li>
+						<li class="nav__item" @click="showMobile = !showMobile">
+							<RouterLink :to="{ path: '/', name: 'notes' }" class="nav__link" exact :class="computedNavLinkClass">notes</RouterLink>
+						</li>
+						<li class="nav__item" @click="showMobile = !showMobile">
+							<RouterLink to="/calc" active-class="nav__link--active" class="nav__link">expenses</RouterLink>
+						</li>
 					</ul>
 					<button v-if="storeAuth.user.id" @click="logOut" class="nav__logout">logout - {{ storeAuth.user.email }}</button>
 				</div>
@@ -24,11 +28,10 @@
 import { computed, ref } from 'vue';
 import { useStoreAuth } from '@/stores/storeAuth';
 import { useStoreNotes } from '@/stores/storeNotes';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 
 // router
 const route = useRoute();
-const router = useRouter();
 
 // store
 const storeAuth = useStoreAuth();

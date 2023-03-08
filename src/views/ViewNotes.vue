@@ -1,26 +1,20 @@
 <template>
 	<AddEditNote :textValue="textValue" :categoryValue="categoryValue" @submitNote="submitNoteValue" @update:textValue="handleTextValueUpdate" @update:categoryValue="handleCategoryValueUpdate">
 		<template #button>
-			<button class="input__submit-btn" type="submit">Add Note</button>
+			<button class="input__submit-btn" type="submit">Dodaj</button>
 		</template>
 	</AddEditNote>
-	<div class="loading">
-		<h2 v-if="!storeNotes.notesLoaded" class="loading-title">Loading...</h2>
-	</div>
+	<NoteLoading />
 	<Note v-for="note in displayStoreNotes" :key="note.id" :note="note" />
-	<div class="pagination" v-if="storeNotes.notesLoaded">
-		<span class="pagination__page">Page {{ currentPage }}</span>
-		<div class="pagination__links-wrap">
-			<RouterLink class="pagination__btn" v-if="previousPage" :to="{ name: 'notes', query: { page: previousPage } }">Previous</RouterLink>
-			<RouterLink class="pagination__btn" v-if="nextPage" :to="{ name: 'notes', query: { page: nextPage } }">Next</RouterLink>
-		</div>
-	</div>
+	<NotePagination :currentPage="currentPage" :previousPage="previousPage" :nextPage="nextPage" />
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
 import AddEditNote from '../components/Notes/AddEditNote.vue';
 import Note from '../components/Notes/Note.vue';
+import NotePagination from '../components/Notes/NotePagination.vue';
+import NoteLoading from '../components/Notes/NoteLoading.vue';
 import { useStoreNotes } from '@/stores/storeNotes';
 import { useRoute } from 'vue-router';
 
@@ -91,34 +85,5 @@ const submitNoteValue = () => {
 .input__submit-btn:hover {
 	color: var(--orange);
 	background-color: #695c79;
-}
-
-.loading {
-	max-width: 1400px;
-	width: 100%;
-	margin: 0 auto;
-	text-align: center;
-}
-
-.loading-title {
-	font-size: 40px;
-}
-
-.pagination {
-	display: flex;
-	justify-content: space-between;
-	padding-bottom: 60px;
-	max-width: 1000px;
-	width: 100%;
-	margin: 0 auto;
-}
-
-.pagination__page {
-	font-size: 20px;
-}
-
-.pagination__btn {
-	margin-left: 18px;
-	font-size: 20px;
 }
 </style>

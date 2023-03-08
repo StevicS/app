@@ -17,7 +17,6 @@ import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
 
-// console.log(route);
 onMounted(() => {
 	storedNotes.routerValueName = router.currentRoute.value.name;
 });
